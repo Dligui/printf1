@@ -29,7 +29,7 @@ _putchar('0');
 else
 {
 _putchar(s[z]);
-*count += 1;
+*cont += 1;
 }
 }
 }
