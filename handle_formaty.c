@@ -24,6 +24,7 @@ break;
 case 'b':
 aff_bnr(va_arg(args, int), cont);
 break;
+break;
 case '%':
 aff_prcntg(cont);
 break;
