@@ -1,13 +1,13 @@
 #include "main.h"
 /**
  * aff_string - printy lina string b convert w safee hadchi li ban lya
- * @ag: lista ta3 les agrmnt
- * @c: kihassb lina int
+ * @args: lista ta3 les agrmnt
+ * @count: kihassb lina int
  * Return: maso9akch hh
  */
-void aff_string(va_list ag, int *c)
+void aff_string(va_list args, int *count)
 {
-char *s = va_arg(ag, char*);
+char *s = va_arg(args, char*);
 int z;
 if (s == NULL)
 {
@@ -23,13 +23,13 @@ if (s[z] < 16)
 {
 _putchar('0');
 }
-*cont += 2;
-*cont += _printf("%X", s[z]);
+*count += 2;
+*count += _printf("%X", s[z]);
 }
 else
 {
 _putchar(s[z]);
-*cont += 1;
+*count += 1;
 }
 }
 }

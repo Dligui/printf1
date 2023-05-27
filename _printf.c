@@ -6,9 +6,9 @@
 */
 int _printf(const char *format, ...)
 {
-int cont = 0;
-va_list ag;
-va_start(ag, format);
+int count = 0;
+va_list args;
+va_start(args, format);
 if (!format || (format[0] == '%' && !format[1]))
 return (-1);
 if (format[0] == '%' && format[1] == ' ' && !format[2])
@@ -20,7 +20,7 @@ if (*format == '%')
 format++;
 if (*format)
 {
-handle_format_specifier(ag, &cont, format);
+handle_formaty(args, &count, format);
 format++;
 }
 }
@@ -28,9 +28,9 @@ else
 {
 _putchar(*format);
 format++;
-cont++;
+count++;
 }
 }
-va_end(ag);
-return (cont);
+va_end(args);
+return (count);
 }
