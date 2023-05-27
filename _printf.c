@@ -1,36 +1,43 @@
 #include "main.h"
 /**
-*_printf - affichage ta3 task 1
-*@format: format inpute const ta3 char w safe
-*Return: 3dad ta3 les carachter w maso9kach
-*/
+ * _printf - printf function
+ * @format: const char pointer
+ * Return: b_len
+ */
 int _printf(const char *format, ...)
 {
-int count = 0;
-va_list args;
-va_start(args, format);
-if (!format || (format[0] == '%' && !format[1]))
-return (-1);
-if (format[0] == '%' && format[1] == ' ' && !format[2])
-return (-1);
-while (*format)
-{
-if (*format == '%')
-{
-format++;
-if (*format)
-{
-handle_formaty(args, &count, format);
-format++;
-}
-}
-else
-{
-_putchar(*format);
-format++;
-count++;
-}
-}
-va_end(args);
-return (count);
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
+
+	register int count = 0;
+
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
+	{
+		if (*p == '%')
+		{
+			p++;
+			if (*p == '%')
+			{
+				count += _putchar('%');
+				continue;
+			}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
+	}
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
 }
